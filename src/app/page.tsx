@@ -4,7 +4,7 @@ import { Input } from '@nextui-org/input';
 import { checkSignIn } from '@/libs/domain/signIn';
 import SignInError from '@/components/SignInError';
 
-export default async function SignIn() {
+export default function SignIn() {
   return (
     <>
       <SignInError />
