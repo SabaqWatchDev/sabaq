@@ -22,6 +22,8 @@ export default function SignIn() {
           <Button type='submit' color='primary' className='w-full'>Iniciar Sesión</Button>
         </form>
       </div>
+
+      <div className='sr-only'></div>
     </>
   )
 }
