@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import saveChanges from "../domain/saveChanges";
 import clearInputs from "../domain/clearInputs";
 import saveResponsibles from "../domain/saveResponsibles";
-import { revalidatePath } from "next/cache";
 
 export default function SubmitSection() {
   const router = useRouter();
@@ -29,9 +28,17 @@ export default function SubmitSection() {
         }
       }
     }
-    const responsibles = await saveResponsibles(inputResponsibles)
-    const records = await saveChanges(storage).then(() => { clearInputs() }).finally(() => { router.push('/inventory') })
-    revalidatePath("/inventory")
+
+    try {
+      const res1 = await saveChanges(storage);
+      const res2 = clearInputs();
+
+      const res3 = await saveResponsibles(inputResponsibles);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      router.refresh()
+    }
   }
 
   return (

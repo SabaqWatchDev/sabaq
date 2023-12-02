@@ -19,7 +19,7 @@ export async function editResponsibles(userInput: responsibleToday, responsibleT
     } catch (error) {
       console.log(error)
     }
-  } else if (userInput.afternoonResponsible === null, userInput.morningResponsible !== null) {
+  } else if (userInput.afternoonResponsible === null && userInput.morningResponsible !== null) {
     try {
       const submitResult = await prisma.responsible.update({
         data: {
@@ -32,11 +32,11 @@ export async function editResponsibles(userInput: responsibleToday, responsibleT
     } catch (error) {
       console.log(error)
     }
-  } else if (userInput.afternoonResponsible !== null, userInput.morningResponsible === null) {
+  } else if (userInput.afternoonResponsible !== null && userInput.morningResponsible === null) {
     try {
       const submitResult = await prisma.responsible.update({
         data: {
-          morningResponsible: userInput.afternoonResponsible,
+          afternoonResponsible: userInput.afternoonResponsible,
         }, where: {
           id: responsibleToday.id
         }
