@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import saveChanges from "../domain/saveChanges";
 import clearInputs from "../domain/clearInputs";
 import saveResponsibles from "../domain/saveResponsibles";
-import { revalidatePath } from "next/cache";
 
 export default function SubmitSection() {
   const router = useRouter();
@@ -31,7 +30,6 @@ export default function SubmitSection() {
     }
 
     try {
-      localStorage.removeItem("ally-supports-cache")
       const res1 = await saveChanges(storage);
       const res2 = clearInputs();
 
