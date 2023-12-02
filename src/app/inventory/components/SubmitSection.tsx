@@ -39,8 +39,8 @@ export default function SubmitSection() {
     } catch (error) {
       console.error(error);
     } finally {
+      revalidatePath("/", 'layout')
       router.refresh()
-      revalidatePath("/inventory", "page")
     }
   }
 
