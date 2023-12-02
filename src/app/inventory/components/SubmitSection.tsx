@@ -30,6 +30,7 @@ export default function SubmitSection() {
     }
 
     try {
+      localStorage.removeItem("ally-supports-cache")
       const res1 = await saveChanges(storage);
       const res2 = clearInputs();
 
