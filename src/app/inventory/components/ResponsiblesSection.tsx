@@ -1,8 +1,7 @@
 "use client"
 
 import { responsibleToday } from "@/types";
-import { Button, Input } from "@nextui-org/react";
-import saveResponsibles from "../domain/saveResponsibles";
+import { Input } from "@nextui-org/react";
 
 export default function ResponsiblesSection({ responsibleData }: { responsibleData: responsibleToday }) {
   let inputResponsibles: responsibleToday = {

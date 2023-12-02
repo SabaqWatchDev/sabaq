@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Card, CardFooter, Button } from "@nextui-org/react";
-import { useSearchParams, redirect } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function SignInError() {
   const searchParams = useSearchParams()
+  const router = useRouter()
 
   const errorStatus = searchParams.get('error')
 
@@ -13,6 +14,7 @@ export default function SignInError() {
 
   const hideErrorMessage = () => {
     setShow("hidden")
+    router.push('/')
   }
 
   useEffect(() => {
