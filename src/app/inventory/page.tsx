@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import { recordToday, recordsToday, responsiblesToday } from '@/types';
 import { prisma } from '@/libs/prisma';
 
@@ -12,6 +11,7 @@ import { prismaSearchDates } from '@/libs/utils/prismaSearchDate';
 
 const Inventory = async () => {
   const [currentDate, nextDay] = prismaSearchDates()
+  
 
   const recordsToday: recordsToday = await prisma.deliveryRecord.findMany({
     where: {
