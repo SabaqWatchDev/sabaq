@@ -29,16 +29,7 @@ export default function SubmitSection() {
       }
     }
 
-    try {
-      const res1 = await saveChanges(storage);
-      const res2 = clearInputs();
-
-      // const res3 = await saveResponsibles(inputResponsibles);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      router.refresh()
-    }
+    const res1 = await saveChanges(storage).then(() => { clearInputs() }).finally(() => { router.refresh() });
   }
 
   return (
