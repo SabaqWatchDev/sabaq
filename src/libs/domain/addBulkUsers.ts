@@ -1,9 +1,8 @@
 "use server"
 
 import { prisma } from '@/libs/prisma'
-import data from '../../../../data'
 
-export async function addBulkUsers() {
+export async function addBulkUsers(data: any) {
   for (let i = 0; i < data.length; i++) {
     const dataEntry = data[i]
 
