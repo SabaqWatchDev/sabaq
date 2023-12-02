@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import saveChanges from "../domain/saveChanges";
 import clearInputs from "../domain/clearInputs";
 import saveResponsibles from "../domain/saveResponsibles";
+import { revalidatePath } from "next/cache";
 
 export default function SubmitSection() {
   const router = useRouter();
@@ -39,6 +40,7 @@ export default function SubmitSection() {
       console.error(error);
     } finally {
       router.refresh()
+      revalidatePath("/inventory", "page")
     }
   }
 
