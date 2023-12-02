@@ -1,7 +1,5 @@
 "use client"
 
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
-
 interface TableInputProps {
   type: 'text' | 'time' | 'datetime' | 'date' | 'number';
   name: string;
@@ -12,20 +10,9 @@ interface TableInputProps {
 }
 
 function TableInput({ type, name, label, readOnly, defaultValue }: TableInputProps) {
-  const searchParams = useSearchParams()
-  const { replace } = useRouter()
-  const pathname = usePathname()
 
   const queryHandler = (term: string) => {
-    const params = new URLSearchParams(searchParams)
-
-    if (term) {
-      params.set(name || "not-working", term)
-    } else {
-      params.delete(name || "not-working")
-    }
-
-    replace(`${pathname}?${params.toString()}`)
+    localStorage.setItem(name, term)
   }
 
   return (

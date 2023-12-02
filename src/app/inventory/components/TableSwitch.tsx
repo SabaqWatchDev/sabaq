@@ -1,29 +1,16 @@
 "use client"
 
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-export default function TableSwitch({ status, name }: { status?: boolean, name?: string }) {
+export default function TableSwitch({ status, name }: { status?: boolean, name: string }) {
   const [isSwitchOn, setIsSwitchOn] = useState(status || false);
-
-  const searchParams = useSearchParams()
-  const { replace } = useRouter()
-  const pathname = usePathname()
 
   const toggleSwitch = () => {
     setIsSwitchOn(!isSwitchOn);
 
-    const params = new URLSearchParams(searchParams)
+    let term = !isSwitchOn
 
-    let term = isSwitchOn
-
-    if (term !== undefined) {
-      params.set(name || "not-working", String(term))
-    } else {
-      params.delete(name || "not-working")
-    }
-
-    replace(`${pathname}?${params.toString()}`)
+    localStorage.setItem(name, String(term))
   };
 
   const getCellStyle = () => {
@@ -40,7 +27,7 @@ export default function TableSwitch({ status, name }: { status?: boolean, name?:
       onClick={toggleSwitch}
       id={name}
     >
-      {isSwitchOn ? 'ENTREGADO' : 'NO ENTREGADO'}
+      {isSwitchOn ? 'RECIBIDO' : 'NO RECIBIDO'}
     </td>
   );
 }

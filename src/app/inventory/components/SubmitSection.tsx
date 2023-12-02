@@ -1,56 +1,35 @@
 "use client"
 
 import { Button } from "@nextui-org/react";
-import { useRouter, useSearchParams } from "next/navigation";
-import saveInventoryChanges from "../domain/saveInventoryChanges";
+import { useRouter } from "next/navigation";
+import saveChanges from "../domain/saveChanges";
+import clearInputs from "../domain/clearInputs";
+import saveResponsibles from "../domain/saveResponsibles";
 
 export default function SubmitSection() {
   const router = useRouter();
-  const searchParams = useSearchParams()
-
-  const searchParamsArray = searchParams.toString().split("&")
 
   const handleSubmit = async () => {
-    const newAmount = document.querySelector<HTMLInputElement>('#new-amount');
-    const newItem = document.querySelector<HTMLInputElement>('#new-item');
-    const deliveredAt = document.querySelector<HTMLInputElement>('#new-deliveredAt');
-    const deliveredTo = document.querySelector<HTMLInputElement>('#new-deliveredTo');
-    const receivedAt = document.querySelector<HTMLInputElement>('#new-receivedAt');
-    const receivedStatus = document.querySelector<HTMLInputElement>('#new-receivedStatus');
+    const storage: any = []
 
-    const inputElements: (HTMLInputElement | null)[] = [
-      newAmount,
-      newItem,
-      deliveredAt,
-      deliveredTo,
-      receivedAt,
-      receivedStatus
-    ];
-
-    function inputsClearer(input: HTMLInputElement | null) {
-      if (input) {
-        input.value = "";
-      }
+    let inputResponsibles = {
+      morningResponsible: localStorage.getItem("responsible-morning"),
+      afternoonResponsible: localStorage.getItem("responsible-afternoon")
     }
 
-    function clearInputs() {
-      for (let i = 0; i < inputElements.length; i++) {
-        if (inputElements[i]) {
-          let input = inputElements[i];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
 
-          if (input?.id.includes("deliveredAt")) {
-            console.log("Saved", input.id)
-          } else {
-            inputsClearer(input)
-          }
+      if (key !== null && key !== "ally-supports-cache") {
+        const value = localStorage.getItem(key);
+
+        if (value !== null) {
+          storage.push(`${key}=${value}`);
         }
       }
-
-      router.push('/inventory')
-      router.refresh();
     }
-
-    const res = await saveInventoryChanges(searchParamsArray).then(() => { clearInputs() })
+    const responsibles = await saveResponsibles(inputResponsibles)
+    const records = await saveChanges(storage).then(() => { clearInputs() }).finally(() => { router.push('/inventory') })
   }
 
   return (

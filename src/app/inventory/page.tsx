@@ -1,20 +1,17 @@
 import React from 'react';
 
-import { Input } from '@nextui-org/react';
 
-import { recordToday, recordsToday } from '@/types';
+import { recordToday, recordsToday, responsiblesToday } from '@/types';
 import { prisma } from '@/libs/prisma';
 
 import ItemRow from './components/ItemRow';
+import ResponsiblesSection from './components/ResponsiblesSection';
 import SubmitSection from './components/SubmitSection';
+import { prismaSearchDates } from '@/libs/utils/prismaSearchDate';
 
 
 const Inventory = async () => {
-  const currentDate = new Date();
-  currentDate.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
-
-  const nextDay = new Date(currentDate);
-  nextDay.setDate(currentDate.getDate() + 1);
+  const [currentDate, nextDay] = prismaSearchDates()
 
   const recordsToday: recordsToday = await prisma.deliveryRecord.findMany({
     where: {
@@ -24,6 +21,15 @@ const Inventory = async () => {
       },
     },
   });
+
+  const responsiblesToday: responsiblesToday = await prisma.responsible.findMany({
+    where: {
+      createdAt: {
+        gte: currentDate,
+        lt: nextDay,
+      }
+    }
+  })
 
   return (
     <div className="w-screen flex flex-col gap-8 justify-center items-center">
@@ -41,10 +47,7 @@ const Inventory = async () => {
           <div className='text-lg w-[47%]'>Turno 6:00 am - 2:00 pm</div>
           <div className='text-lg w-[47%]'>Turno 2:00 am -  10:00 pm</div>
         </div>
-        <div className='flex justify-between'>
-          <div className='w-[47%]'><Input size='sm' variant='underlined' /></div>
-          <div className='w-[47%]'><Input size='sm' variant='underlined' /></div>
-        </div>
+        <ResponsiblesSection responsibleData={responsiblesToday[0]} />
       </div>
 
       <div className='w-10/12 overflow-auto '>

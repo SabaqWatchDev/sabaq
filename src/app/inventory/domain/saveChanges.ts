@@ -1,11 +1,9 @@
-"use client"
-
 import { recordInput } from "@/types";
 import setTime from "./setTime";
-import { createRecord } from "@/libs/domain/submitRecord";
+import { createRecord } from "@/libs/domain/createRecord";
 import { editRecord } from "@/libs/domain/editRecord";
 
-export default async function saveInventoryChanges(searchParams: string[]) {
+export default async function saveChanges(inventoryStorage: string[]) {
   const rawInput: recordInput = {
     quantity: 1,
     article: "No especificado",
@@ -13,8 +11,8 @@ export default async function saveInventoryChanges(searchParams: string[]) {
   }
 
   function prepareNewInput() {
-    for (let i = 0; i < searchParams.length; i++) {
-      const [inputId, inputFieldAndValue] = searchParams[i].split('-')
+    for (let i = 0; i < inventoryStorage.length; i++) {
+      const [inputId, inputFieldAndValue] = inventoryStorage[i].split('-')
       const [inputField, inputValue] = inputFieldAndValue.split('=')
 
       if (inputId === "new") {
@@ -24,19 +22,19 @@ export default async function saveInventoryChanges(searchParams: string[]) {
             break
 
           case "item":
-            rawInput.article = inputValue.replace("+", " ")
+            rawInput.article = inputValue
             break
 
           case "deliveredTo":
-            rawInput.deliveredTo = inputValue.replace("+", " ")
+            rawInput.deliveredTo = inputValue
             break
 
           case "receivedAt":
             rawInput.receivedAt = setTime(inputValue) || null
             break
 
-          case "receiveStatus":
-            rawInput.receivedStatus = Boolean(inputValue)
+          case "receivedStatus":
+            rawInput.receivedStatus = inputValue === "true" ? true : false || false
             break
         }
       }
@@ -46,8 +44,8 @@ export default async function saveInventoryChanges(searchParams: string[]) {
   }
 
   const newInputExists = () => {
-    for (let i = 0; i < searchParams.length; i++) {
-      const inputId = searchParams[i].split('-')[0]
+    for (let i = 0; i < inventoryStorage.length; i++) {
+      const inputId = inventoryStorage[i].split('-')[0]
 
       if (inputId === "new") {
         return true
@@ -73,8 +71,8 @@ export default async function saveInventoryChanges(searchParams: string[]) {
   const existingInputArray: recordInput[] = []
 
   function prepareExistingInput() {
-    for (let i = 0; i < searchParams.length; i++) {
-      const [inputId, inputFieldAndValue] = searchParams[i].split('-')
+    for (let i = 0; i < inventoryStorage.length; i++) {
+      const [inputId, inputFieldAndValue] = inventoryStorage[i].split('-')
       const [inputField, inputValue] = inputFieldAndValue.split('=')
 
       existingRawInput.id = Number(inputId)
@@ -86,18 +84,18 @@ export default async function saveInventoryChanges(searchParams: string[]) {
             break
 
           case "item":
-            existingRawInput.article = inputValue
+            existingRawInput.article = inputValue.replace("+", " ")
             break
 
           case "deliveredTo":
-            existingRawInput.deliveredTo = inputValue
+            existingRawInput.deliveredTo = inputValue.replace("+", " ")
 
           case "receivedAt":
             existingRawInput.receivedAt = setTime(inputValue) || null
             break
 
-          case "receiveStatus":
-            existingRawInput.receivedStatus = Boolean(inputValue)
+          case "receivedStatus":
+            existingRawInput.receivedStatus = inputValue === "true" ? true : false || false
             break
         }
 

@@ -7,7 +7,7 @@ export async function createRecord(userInput: recordInput) {
   const quantity = userInput.quantity
   const article = userInput.article
   const deliveredTo = userInput.deliveredTo
-  const receivedStatus = !Boolean(userInput.receivedStatus)
+  const receivedStatus = Boolean(userInput.receivedStatus)
   const receivedAt = userInput.receivedAt
 
   try {

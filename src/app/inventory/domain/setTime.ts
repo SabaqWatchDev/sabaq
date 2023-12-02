@@ -1,9 +1,9 @@
 export default function setTime(time: string) {
   const receivedAt = new Date();
 
-  const [hours, minutes] = time.split('%3A').map(Number);
+  const [hours, minutes] = time.split(':').map(Number);
 
-  receivedAt.setHours(hours - 5);
+  receivedAt.setHours(hours);
   receivedAt.setMinutes(minutes);
   receivedAt.setSeconds(0);
 
