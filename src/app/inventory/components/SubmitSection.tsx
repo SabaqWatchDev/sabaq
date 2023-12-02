@@ -33,7 +33,7 @@ export default function SubmitSection() {
       const res1 = await saveChanges(storage);
       const res2 = clearInputs();
 
-      const res3 = await saveResponsibles(inputResponsibles);
+      // const res3 = await saveResponsibles(inputResponsibles);
     } catch (error) {
       console.error(error);
     } finally {
