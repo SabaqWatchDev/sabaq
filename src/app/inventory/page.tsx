@@ -8,11 +8,9 @@ import ResponsiblesSection from './components/ResponsiblesSection';
 import SubmitSection from './components/SubmitSection';
 import { prismaSearchDates } from '@/libs/utils/prismaSearchDate';
 
-
 const Inventory = async () => {
   const [currentDate, nextDay] = prismaSearchDates()
   
-
   const recordsToday: recordsToday = await prisma.deliveryRecord.findMany({
     where: {
       deliveredAt: {
