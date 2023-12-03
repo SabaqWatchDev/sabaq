@@ -1,27 +1,20 @@
 import React from 'react';
 
 import { recordToday, recordsToday, responsiblesToday } from '@/types';
-import { prisma } from '@/libs/prisma';
 
 import ItemRow from './components/ItemRow';
 import ResponsiblesSection from './components/ResponsiblesSection';
 import SubmitSection from './components/SubmitSection';
 import { prismaSearchDates } from '@/libs/utils/prismaSearchDate';
 import { getRecords } from './adapter/getRecords';
+import { getResponsibles } from './adapter/getResponsibles';
 
 export default async function Inventory() {
   const [currentDate, nextDay] = prismaSearchDates()
 
   const recordsToday: recordsToday = await getRecords()
 
-  const responsiblesToday: responsiblesToday = await prisma.responsible.findMany({
-    where: {
-      createdAt: {
-        gte: currentDate,
-        lt: nextDay,
-      }
-    }
-  })
+  const responsiblesToday: responsiblesToday = await getResponsibles()
 
   return (
     <div className="w-screen flex flex-col gap-8 justify-center items-center">
@@ -68,7 +61,7 @@ export default async function Inventory() {
                 <tr key={recordToday.id + "space"}>
                   <td key={recordToday.id + "blank"} className='h-2'></td>
                 </tr>
-                
+
               </React.Fragment>
             ))}
 
