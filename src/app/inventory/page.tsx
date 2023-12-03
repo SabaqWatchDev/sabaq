@@ -10,20 +10,22 @@ import { prismaSearchDates } from '@/libs/utils/prismaSearchDate';
 
 import { getRecords } from './adapter/getRecords';
 import { getResponsibles } from './adapter/getResponsibles';
-
-import { prisma } from '@/libs/prisma';
+import Image from 'next/image';
 
 export default async function Inventory() {
-  const [currentDate, nextDay] = prismaSearchDates()
+  const [currentDate] = prismaSearchDates()
 
   const recordsToday: recordsToday = await getRecords()
 
   const responsiblesToday: responsiblesToday = await getResponsibles()
 
   return (
-    <div className="w-screen flex flex-col gap-8 justify-center items-center">
-      <div className="flex justify-between w-10/12 pt-6">
-        <h1 className="text-3xl font-bold">FORMATO ENTREGA Y RECIBIMIENTO DE ARTÍCULOS DE VIGILANCIA</h1>
+    <div className="w-screen flex flex-col gap-20 justify-center items-center">
+      <div className="flex justify-between items-center w-10/12 pt-6">
+        <div className='flex items-center gap-8'>
+          <h1 className="text-3xl font-bold">FORMATO ENTREGA Y RECIBIMIENTO DE ARTÍCULOS DE VIGILANCIA</h1>
+          <Image src={'/logo.jpg'} alt='Sabaq Logo' width={200} height={1} />
+        </div>
 
         <div className='h-full flex gap-4'>
           <label className='text-xl font-bold' htmlFor="date">Fecha: </label>
