@@ -9,13 +9,12 @@ import ItemRow from './components/ItemRow';
 import ResponsiblesSection from './components/ResponsiblesSection';
 import SubmitSection from './components/SubmitSection';
 import { prismaSearchDates } from '@/libs/utils/prismaSearchDate';
+import { getRecords } from './adapter/getRecords';
 
 const Inventory = async () => {
   const [currentDate, nextDay] = prismaSearchDates()
 
-  const recordsTodayRes: any = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/records`, { cache: "no-cache" })
-  const recordsToday: recordsToday = await recordsTodayRes.json()
-  console.log(recordsToday)
+  const recordsToday: recordsToday = await getRecords()
 
   const responsiblesToday: responsiblesToday = await prisma.responsible.findMany({
     where: {
