@@ -7,18 +7,12 @@ import ItemRow from './components/ItemRow';
 import ResponsiblesSection from './components/ResponsiblesSection';
 import SubmitSection from './components/SubmitSection';
 import { prismaSearchDates } from '@/libs/utils/prismaSearchDate';
+import { getRecords } from './adapter/getRecords';
 
 export default async function Inventory() {
   const [currentDate, nextDay] = prismaSearchDates()
 
-  const recordsToday: recordsToday = await prisma.deliveryRecord.findMany({
-    where: {
-      deliveredAt: {
-        gte: currentDate,
-        lt: nextDay,
-      },
-    },
-  });
+  const recordsToday: recordsToday = await getRecords()
 
   const responsiblesToday: responsiblesToday = await prisma.responsible.findMany({
     where: {
