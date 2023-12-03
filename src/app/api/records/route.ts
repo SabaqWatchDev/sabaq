@@ -1,7 +1,7 @@
 import { prisma } from "@/libs/prisma";
 import { prismaSearchDates } from "@/libs/utils/prismaSearchDate";
 
-// export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic'
 
 export async function GET() {
   try {
