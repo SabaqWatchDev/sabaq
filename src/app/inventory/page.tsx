@@ -7,9 +7,8 @@ import ItemRow from './components/ItemRow';
 import ResponsiblesSection from './components/ResponsiblesSection';
 import SubmitSection from './components/SubmitSection';
 import { prismaSearchDates } from '@/libs/utils/prismaSearchDate';
-import { getRecords } from './adapter/getRecords';
 
-const Inventory = async () => {
+export default async function Inventory() {
   const [currentDate, nextDay] = prismaSearchDates()
 
   const recordsToday: recordsToday = await prisma.deliveryRecord.findMany({
@@ -49,7 +48,7 @@ const Inventory = async () => {
         <ResponsiblesSection responsibleData={responsiblesToday[0]} />
       </div>
 
-      <div className='w-10/12 overflow-auto '>
+      <div className='w-10/12 overflow-auto'>
         <table className='w-full border-spacing-4' >
           <thead>
             <tr>
@@ -84,9 +83,6 @@ const Inventory = async () => {
       </div>
 
       <SubmitSection />
-
     </div>
   );
 };
-
-export default Inventory;
