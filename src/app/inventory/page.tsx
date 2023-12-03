@@ -18,15 +18,7 @@ export default async function Inventory() {
 
   const recordsToday: recordsToday = await getRecords()
 
-  // const responsiblesToday: responsiblesToday = await getResponsibles()
-  const responsiblesToday: responsiblesToday = await await prisma.responsible.findMany({
-    where: {
-      createdAt: {
-        gte: currentDate,
-        lt: nextDay,
-      },
-    },
-  });
+  const responsiblesToday: responsiblesToday = await getResponsibles()
 
   return (
     <div className="w-screen flex flex-col gap-8 justify-center items-center">
