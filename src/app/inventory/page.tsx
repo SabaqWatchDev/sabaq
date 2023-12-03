@@ -68,6 +68,7 @@ export default async function Inventory() {
                 <tr key={recordToday.id + "space"}>
                   <td key={recordToday.id + "blank"} className='h-2'></td>
                 </tr>
+                
               </React.Fragment>
             ))}
 

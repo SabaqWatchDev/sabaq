@@ -12,11 +12,6 @@ export default function SubmitSection() {
   const handleSubmit = async () => {
     const storage: any = []
 
-    let inputResponsibles = {
-      morningResponsible: localStorage.getItem("responsible-morning"),
-      afternoonResponsible: localStorage.getItem("responsible-afternoon")
-    }
-
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
 
@@ -29,7 +24,12 @@ export default function SubmitSection() {
       }
     }
 
-    const res1 = await saveChanges(storage).then(() => { clearInputs() }).finally(() => { router.refresh() });
+    let inputResponsibles = {
+      morningResponsible: localStorage.getItem("responsible-morning"),
+      afternoonResponsible: localStorage.getItem("responsible-afternoon")
+    }
+
+    const res1 = await saveChanges(storage).then(() => { saveResponsibles(inputResponsibles) }).then(() => { clearInputs() }).finally(() => { router.refresh() });
   }
 
   return (
