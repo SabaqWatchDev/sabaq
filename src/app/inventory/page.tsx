@@ -2,9 +2,9 @@ import React from 'react';
 
 import { recordToday, recordsToday, responsiblesToday } from '@/types';
 
-import ItemRow from './components/ItemRow';
-import ResponsiblesSection from './components/ResponsiblesSection';
-import SubmitSection from './components/SubmitSection';
+import ItemRow from './components/table/ItemRow';
+import ResponsiblesSection from './components/sections/ResponsiblesSection';
+import SubmitSection from './components/sections/SubmitSection';
 import { prismaSearchDates } from '@/libs/utils/prismaSearchDate';
 import { getRecords } from './adapter/getRecords';
 import { getResponsibles } from './adapter/getResponsibles';

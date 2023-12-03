@@ -2,9 +2,9 @@
 
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import saveChanges from "../domain/saveChanges";
-import clearInputs from "../domain/clearInputs";
-import saveResponsibles from "../domain/saveResponsibles";
+import saveChanges from "../../domain/saveChanges";
+import clearInputs from "../../domain/clearInputs";
+import saveResponsibles from "../../domain/saveResponsibles";
 
 export default function SubmitSection() {
   const router = useRouter();
