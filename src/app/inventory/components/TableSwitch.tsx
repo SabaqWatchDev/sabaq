@@ -1,5 +1,6 @@
 "use client"
 
+import { Button } from '@nextui-org/react';
 import React, { useState } from 'react';
 
 export default function TableSwitch({ status, name }: { status?: boolean, name: string }) {
@@ -15,19 +16,21 @@ export default function TableSwitch({ status, name }: { status?: boolean, name: 
 
   const getCellStyle = () => {
     if (isSwitchOn) {
-      return "h-[56px] min-w-[125px] rounded-xl flex items-center justify-center bg-primary-100 text-primary-900 cursor-pointer";
+      return "h-[56px] w-full rounded-xl flex items-center justify-center bg-primary-100 text-primary-900 cursor-pointer";
     } else {
-      return "h-[56px] min-w-[125px] rounded-xl flex items-center justify-center bg-danger-100 text-danger-900 cursor-pointer";
+      return "h-[56px] w-full rounded-xl flex items-center justify-center bg-danger-100 text-danger-900 cursor-pointer";
     }
   };
 
   return (
     <td
-      className={getCellStyle()}
-      onClick={toggleSwitch}
-      id={name}
+      className='min-w-[125px]'
     >
-      {isSwitchOn ? 'RECIBIDO' : 'NO RECIBIDO'}
+      <Button className={getCellStyle()}
+        onPress={toggleSwitch}
+        id={name} >
+        {isSwitchOn ? 'RECIBIDO' : 'NO RECIBIDO'}
+      </Button>
     </td>
   );
 }
