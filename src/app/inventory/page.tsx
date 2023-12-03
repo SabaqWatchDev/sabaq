@@ -12,7 +12,14 @@ import { getRecords } from './adapter/getRecords';
 const Inventory = async () => {
   const [currentDate, nextDay] = prismaSearchDates()
 
-  const recordsToday: recordsToday = await getRecords()
+  const recordsToday: recordsToday = await prisma.deliveryRecord.findMany({
+    where: {
+      deliveredAt: {
+        gte: currentDate,
+        lt: nextDay,
+      },
+    },
+  });
 
   const responsiblesToday: responsiblesToday = await prisma.responsible.findMany({
     where: {
