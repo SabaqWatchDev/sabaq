@@ -12,15 +12,10 @@ import { prismaSearchDates } from '@/libs/utils/prismaSearchDate';
 
 const Inventory = async () => {
   const [currentDate, nextDay] = prismaSearchDates()
-  
-  const recordsToday: recordsToday = await prisma.deliveryRecord.findMany({
-    where: {
-      deliveredAt: {
-        gte: currentDate,
-        lt: nextDay,
-      },
-    },
-  });
+
+  const recordsTodayRes: any = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/records`, { cache: "no-cache" })
+  const recordsToday: recordsToday = await recordsTodayRes.json()
+  console.log(recordsToday)
 
   const responsiblesToday: responsiblesToday = await prisma.responsible.findMany({
     where: {
@@ -70,7 +65,7 @@ const Inventory = async () => {
           </thead>
 
           <tbody>
-            {recordsToday.map((recordToday: recordToday) => (
+            {recordsToday && recordsToday.map((recordToday: recordToday) => (
               <React.Fragment key={recordToday.id + "fragment"}>
                 <ItemRow key={recordToday.id + "row"} rowInformation={recordToday} />
                 <tr key={recordToday.id + "space"}>
