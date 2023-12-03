@@ -1,7 +1,7 @@
 import { recordInput } from "@/types";
 import setTime from "./setTime";
-import { createRecord } from "@/libs/domain/createRecord";
-import { editRecord } from "@/libs/domain/editRecord";
+import { createRecord } from "./createRecord";
+import { editRecord } from "./editRecord";
 
 export default async function saveChanges(inventoryStorage: string[]) {
   const rawInput: recordInput = {

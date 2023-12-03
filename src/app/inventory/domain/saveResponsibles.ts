@@ -2,9 +2,9 @@
 
 import { prisma } from "@/libs/prisma"
 import { prismaSearchDates } from "@/libs/utils/prismaSearchDate"
-import { createResponsibles } from "@/libs/domain/createResponsibles"
+import { createResponsibles } from "./createResponsibles"
 import { responsibleToday, responsiblesToday } from "@/types"
-import { editResponsibles } from "@/libs/domain/editResponsibles"
+import { editResponsibles } from "./editResponsibles"
 
 export default async function saveResponsibles(inputResponsibles: responsibleToday) {
   const [currentDate, nextDay] = prismaSearchDates()
