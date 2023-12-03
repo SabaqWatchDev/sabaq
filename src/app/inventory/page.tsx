@@ -1,20 +1,23 @@
 import React from 'react';
 
-import { recordToday, recordsToday, responsiblesToday } from '@/types';
+import { recordToday, recordsToday, responsibleToday, responsiblesToday } from '@/types';
 
 import ItemRow from './components/table/ItemRow';
 import ResponsiblesSection from './components/sections/ResponsiblesSection';
 import SubmitSection from './components/sections/SubmitSection';
+
 import { prismaSearchDates } from '@/libs/utils/prismaSearchDate';
+
 import { getRecords } from './adapter/getRecords';
 import { getResponsibles } from './adapter/getResponsibles';
 
 export default async function Inventory() {
-  const [currentDate, nextDay] = prismaSearchDates()
+  const [currentDate] = prismaSearchDates()
 
   const recordsToday: recordsToday = await getRecords()
 
   const responsiblesToday: responsiblesToday = await getResponsibles()
+  const responsibleToday: responsibleToday = responsiblesToday[0]
 
   return (
     <div className="w-screen flex flex-col gap-8 justify-center items-center">
@@ -32,7 +35,7 @@ export default async function Inventory() {
           <div className='text-lg w-[47%]'>Turno 6:00 am - 2:00 pm</div>
           <div className='text-lg w-[47%]'>Turno 2:00 am -  10:00 pm</div>
         </div>
-        <ResponsiblesSection responsibleData={responsiblesToday[0]} />
+        {responsibleToday && <ResponsiblesSection responsibleData={responsibleToday} />}
       </div>
 
       <div className='w-10/12 overflow-auto'>
