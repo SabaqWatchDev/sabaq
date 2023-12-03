@@ -2,16 +2,21 @@ import { prisma } from "@/libs/prisma";
 import { prismaSearchDates } from "@/libs/utils/prismaSearchDate";
 
 export async function GET() {
-  const [currentDate, nextDay] = prismaSearchDates()
+  try {
+    const [currentDate, nextDay] = prismaSearchDates();
 
-  const response = await prisma.deliveryRecord.findMany({
-    where: {
-      deliveredAt: {
-        gte: currentDate,
-        lt: nextDay,
+    const response = await prisma.deliveryRecord.findMany({
+      where: {
+        deliveredAt: {
+          gte: currentDate,
+          lt: nextDay,
+        },
       },
-    },
-  });
+    });
 
-  return Response.json(response)
+    return Response.json(response);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return Response.json({ error: "An error occurred while fetching data" }, { status: 500 });
+  }
 }
