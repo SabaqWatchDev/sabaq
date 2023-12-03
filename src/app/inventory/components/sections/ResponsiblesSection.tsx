@@ -3,7 +3,7 @@
 import { responsibleToday } from "@/types";
 import { Input } from "@nextui-org/react";
 
-export default function ResponsiblesSection({ responsibleData }: { responsibleData: responsibleToday }) {
+export default function ResponsiblesSection({ responsibleData }: { responsibleData?: responsibleToday }) {
   let inputResponsibles: responsibleToday = {
     morningResponsible: responsibleData?.morningResponsible || "",
     afternoonResponsible: responsibleData?.afternoonResponsible || ""

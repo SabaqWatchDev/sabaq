@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { recordToday, recordsToday, responsibleToday, responsiblesToday } from '@/types';
+import { recordToday, recordsToday, responsiblesToday } from '@/types';
 
 import ItemRow from './components/table/ItemRow';
 import ResponsiblesSection from './components/sections/ResponsiblesSection';
@@ -11,12 +11,22 @@ import { prismaSearchDates } from '@/libs/utils/prismaSearchDate';
 import { getRecords } from './adapter/getRecords';
 import { getResponsibles } from './adapter/getResponsibles';
 
+import { prisma } from '@/libs/prisma';
+
 export default async function Inventory() {
-  const [currentDate] = prismaSearchDates()
+  const [currentDate, nextDay] = prismaSearchDates()
 
   const recordsToday: recordsToday = await getRecords()
 
-  const responsiblesToday: responsiblesToday = await getResponsibles()
+  // const responsiblesToday: responsiblesToday = await getResponsibles()
+  const responsiblesToday: responsiblesToday = await await prisma.responsible.findMany({
+    where: {
+      createdAt: {
+        gte: currentDate,
+        lt: nextDay,
+      },
+    },
+  });
 
   return (
     <div className="w-screen flex flex-col gap-8 justify-center items-center">

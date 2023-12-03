@@ -12,9 +12,9 @@ export async function GET() {
         createdAt: {
           gte: currentDate,
           lt: nextDay,
-        }
-      }
-    })
+        },
+      },
+    });
 
     return Response.json(response);
   } catch (error) {
