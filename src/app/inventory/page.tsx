@@ -17,7 +17,6 @@ export default async function Inventory() {
   const recordsToday: recordsToday = await getRecords()
 
   const responsiblesToday: responsiblesToday = await getResponsibles()
-  const responsibleToday: responsibleToday = responsiblesToday[0]
 
   return (
     <div className="w-screen flex flex-col gap-8 justify-center items-center">
@@ -35,7 +34,7 @@ export default async function Inventory() {
           <div className='text-lg w-[47%]'>Turno 6:00 am - 2:00 pm</div>
           <div className='text-lg w-[47%]'>Turno 2:00 am -  10:00 pm</div>
         </div>
-        {responsibleToday && <ResponsiblesSection responsibleData={responsibleToday} />}
+        {responsiblesToday && <ResponsiblesSection responsibleData={responsiblesToday[0]} />}
       </div>
 
       <div className='w-10/12 overflow-auto'>
