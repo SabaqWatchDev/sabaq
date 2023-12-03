@@ -1,3 +1,5 @@
+"use server"
+
 import { prisma } from "@/libs/prisma"
 import { prismaSearchDates } from "@/libs/utils/prismaSearchDate"
 import { createResponsibles } from "@/libs/domain/createResponsibles"
