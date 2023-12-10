@@ -8,16 +8,24 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prismaDev": "dotenv -e .env.development prisma migrate dev"
+    "prismaDev": "dotenv -e .env.development prisma migrate dev",
+    "prismaDevStudio": "dotenv -e .env.development prisma studio",
+    "prismaProd": "dotenv -e .env.production prisma migrate dev",
+    "prismaProdStudio": "dotenv -e .env.production prisma studio"
   },
   "dependencies": {
+    "@edgestore/react": "^0.1.4",
+    "@edgestore/server": "^0.1.4",
+    "@heroicons/react": "^2.0.18",
     "@nextui-org/react": "^2.2.9",
     "@prisma/client": "^5.6.0",
+    "@tremor/react": "^3.11.1",
     "dotenv-cli": "^7.3.0",
     "framer-motion": "^10.16.5",
     "next": "14.0.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",

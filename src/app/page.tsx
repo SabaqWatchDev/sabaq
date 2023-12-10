@@ -1,5 +1,3 @@
-"use client"
-
 import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
 
@@ -17,7 +15,7 @@ export default function SignIn() {
           <h1 className='text-2xl'>Ingrese sus datos</h1>
 
           <div className='gap-4 flex flex-col'>
-            <Input id='username' name='username' variant='underlined' color='primary' label='Nombre de Usuario' description='Ingrese la primera letra de su primer nombre y su apellido.' />
+            <Input id='username' name='username' variant='underlined' color='primary' label='Nombre de Usuario' description='Ingrese su primer nombre y su apellido de casado.' />
             <Input id='password' name='password' variant='underlined' color='primary' label='Contraseña' type='password' description='Ingrese la contraseña provista por el encargado del departamento' />
           </div>
 

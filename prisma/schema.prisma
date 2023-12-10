@@ -41,5 +41,26 @@ model DeliveryRecord {
   deliveredAt    DateTime  @default(now())
   deliveredTo    String
   receivedAt     DateTime?
-  receivedStatus Boolean @default(false)
+  receivedStatus Boolean   @default(false)
+}
+
+model Status {
+  id     Int     @id @default(autoincrement())
+  status Items[]
+}
+
+model InventoryNotes {
+  id   Int     @id @default(autoincrement())
+  note Items[]
+}
+
+model Items {
+  id         Int            @id @default(autoincrement())
+  item       String
+  incomeDate DateTime       @default(now())
+  status     Status         @relation(fields: [statusId], references: [id])
+  statusId   Int
+  note       InventoryNotes @relation(fields: [noteId], references: [id])
+  noteId     Int
+  pictureUrl String
 }
