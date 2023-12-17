@@ -23,8 +23,17 @@ model Volunteer {
 }
 
 model Task {
-  id    Int    @id @default(autoincrement())
-  title String
+  id   Int          @id @default(autoincrement())
+  task TaskStatus[]
+}
+
+model TaskStatus {
+  id        Int      @id @default(autoincrement())
+  taskId    Int
+  task      Task     @relation(fields: [taskId], references: [id])
+  status    Boolean
+  createdAt DateTime @default(now()) @unique
+  updatedAt DateTime @updatedAt
 }
 
 model Responsible {
