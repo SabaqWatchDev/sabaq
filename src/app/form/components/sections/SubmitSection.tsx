@@ -25,8 +25,8 @@ export default function SubmitSection() {
     }
 
     let inputResponsibles = {
-      morningResponsible: localStorage.getItem("responsible-morning"),
-      afternoonResponsible: localStorage.getItem("responsible-afternoon")
+      morningResponsible: localStorage.getItem("responsible-morning") || "",
+      afternoonResponsible: localStorage.getItem("responsible-afternoon") || ""
     }
 
     const res1 = await saveChanges(storage).then(() => { saveResponsibles(inputResponsibles) }).then(() => { clearInputs() }).finally(() => { router.refresh() });

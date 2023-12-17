@@ -1,10 +1,14 @@
 "use client"
 
 import { Button } from '@nextui-org/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function TableSwitch({ status, name }: { status?: boolean, name: string }) {
-  const [isSwitchOn, setIsSwitchOn] = useState(status || false);
+  const [isSwitchOn, setIsSwitchOn] = useState(false);
+
+  useEffect(() => {
+    setIsSwitchOn(status || false);
+  }, [status])
 
   const toggleSwitch = () => {
     setIsSwitchOn(!isSwitchOn);
@@ -26,7 +30,7 @@ export default function TableSwitch({ status, name }: { status?: boolean, name: 
     <td
       className='min-w-[125px]'
     >
-      <Button className={getCellStyle()}
+      <Button className={getCellStyle() || ""}
         onPress={toggleSwitch}
         id={name} >
         {isSwitchOn ? 'RECIBIDO' : 'NO RECIBIDO'}
