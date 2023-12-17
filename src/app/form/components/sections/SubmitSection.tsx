@@ -15,7 +15,7 @@ export default function SubmitSection() {
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
 
-      if (key !== null && key !== "ally-supports-cache") {
+      if (key !== null && key !== "ally-supports-cache" && key !== "addForm" && key !== "editForm") {
         const value = localStorage.getItem(key);
 
         if (value !== null) {

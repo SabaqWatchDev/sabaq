@@ -1,23 +1,16 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
-import { recordToday, recordsToday, responsiblesToday } from '@/types';
-
-import ItemRow from './components/table/ItemRow';
 import ResponsiblesSection from './components/sections/ResponsiblesSection';
 import SubmitSection from './components/sections/SubmitSection';
 
 import { prismaSearchDates } from '@/libs/utils/prismaSearchDate';
 
-import { getRecords } from './adapter/getRecords';
-import { getResponsibles } from './adapter/getResponsibles';
 import NavigationBar from '@/components/NavigationBar';
+import ResponsibleLoader from './components/loaders/ResponsibleLoader';
+import FormTable from './components/table/FormTable';
 
-export default async function Inventory() {
+export default function Inventory() {
   const [currentDate] = prismaSearchDates()
-
-  const recordsToday: recordsToday = await getRecords()
-
-  const responsiblesToday: responsiblesToday = await getResponsibles()
 
   return (
     <>
@@ -35,47 +28,10 @@ export default async function Inventory() {
           </div>
         </div>
 
-        <div className='w-10/12 flex flex-col '>
-          <div className='flex justify-between'>
-            <div className='text-lg w-[47%]'>Turno 6:00 am - 2:00 pm</div>
-            <div className='text-lg w-[47%]'>Turno 2:00 am -  10:00 pm</div>
-          </div>
-          {responsiblesToday && <ResponsiblesSection responsibleData={responsiblesToday[0]} />}
-        </div>
+        <Suspense fallback={<ResponsibleLoader />}><ResponsiblesSection /></Suspense>
 
         <div className='w-10/12 overflow-auto'>
-          <table className='w-full border-spacing-4' >
-            <thead>
-              <tr>
-                <th >Cantidad</th>
-                <td className='h-2'></td>
-                <th >Artículo</th>
-                <td className='h-2'></td>
-                <th >Hora Entrega</th>
-                <td className='h-2'></td>
-                <th >Entregado a</th>
-                <td className='h-2'></td>
-                <th >Hora Recibido</th>
-                <td className='h-2'></td>
-                <th >Recibido</th>
-                <td className='h-2'></td>
-              </tr>
-            </thead>
-
-            <tbody>
-              {recordsToday && recordsToday.map((recordToday: recordToday) => (
-                <React.Fragment key={recordToday.id + "fragment"}>
-                  <ItemRow key={recordToday.id + "row"} rowInformation={recordToday} />
-                  <tr key={recordToday.id + "space"}>
-                    <td key={recordToday.id + "blank"} className='h-2'></td>
-                  </tr>
-
-                </React.Fragment>
-              ))}
-
-              <ItemRow />
-            </tbody>
-          </table>
+          <Suspense fallback={<ResponsibleLoader />}><FormTable /></Suspense>
         </div>
 
         <SubmitSection />

@@ -8,8 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prismaDev": "dotenv -e .env.development prisma migrate dev",
-    "prismaDevStudio": "dotenv -e .env.development prisma studio",
+    "prismaDev": "dotenv -e .env.local prisma migrate dev",
+    "prismaDevStudio": "dotenv -e .env.local prisma studio",
     "prismaProd": "dotenv -e .env.production prisma migrate dev",
     "prismaProdStudio": "dotenv -e .env.production prisma studio"
   },
@@ -22,8 +22,9 @@
     "@tremor/react": "^3.11.1",
     "dotenv-cli": "^7.3.0",
     "framer-motion": "^10.16.5",
-    "next": "14.0.3",
+    "next": "^14.0.5-canary.5",
     "react": "^18",
+    "react-content-loader": "^6.2.1",
     "react-dom": "^18",
     "zod": "^3.22.4"
   },

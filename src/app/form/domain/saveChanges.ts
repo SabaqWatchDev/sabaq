@@ -12,6 +12,7 @@ export default async function saveChanges(inventoryStorage: string[]) {
 
   function prepareNewInput() {
     for (let i = 0; i < inventoryStorage.length; i++) {
+      console.log(inventoryStorage[i])
       const [inputId, inputFieldAndValue] = inventoryStorage[i].split('-')
       const [inputField, inputValue] = inputFieldAndValue.split('=')
 
