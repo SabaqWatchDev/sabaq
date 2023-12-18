@@ -11,11 +11,11 @@ export default function NavigationBar(currentPage: { currentPage: "inventory" | 
         <Image as={NextImage} src={'/logo.jpg'} alt='Sabaq Logo' width={100} height={100} />
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem {...currentPage.currentPage === "inventory" ? { isActive: true } : {}}>
+        {/* <NavbarItem {...currentPage.currentPage === "inventory" ? { isActive: true } : {}}>
           <Link {...currentPage.currentPage === "inventory" ? {} : { color: "foreground" }} href="inventory">
             Inventario
           </Link>
-        </NavbarItem>
+        </NavbarItem> */}
         <NavbarItem {...currentPage.currentPage === "form" ? { isActive: true } : {}}>
           <Link {...currentPage.currentPage === "form" ? {} : { color: "foreground" }} href="form">
             Formulario
