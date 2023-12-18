@@ -15,7 +15,7 @@ export async function checkSignIn(userInput: FormData) {
   })
 
   if (userData && userData.phoneNumber && userData.phoneNumber.toString() === String(password)) {
-    redirect('/inventory')
+    redirect('/form')
   } else {
     redirect('/?error=true')
   }
