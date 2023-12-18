@@ -41,12 +41,12 @@ export default function TabsSection(data?: any) {
 
       localStorage.setItem(String(key), String(value));
     }
-  }, [statuses, data]);
+  }, [statuses]);
 
-  const keysConTrue = (data.data as any[])
-    .filter((objeto: any) => Object.values(objeto).some((valor: any) => valor === true))
-    .map((objeto: any) => Object.keys(objeto))
-    .flat();
+    const keysConTrue = (data.data as any[])
+      .filter((objeto: any) => Object.values(objeto).some((valor: any) => valor === true))
+      .map((objeto: any) => Object.keys(objeto))
+      .flat();
 
   const handleStatus = (index: number, id: string, value: boolean) => {
     setStatuses((prevStatuses: any) => {
@@ -59,7 +59,7 @@ export default function TabsSection(data?: any) {
   return (
     <Tabs >
       <Tab title="6AM - 2PM" className="w-10/12">
-        <CheckboxGroup defaultValue={keysConTrue}>
+        <CheckboxGroup defaultValue={keysConTrue || []}>
           <Checkbox lineThrough onValueChange={(value) => { handleStatus(0, "checkReceived", value) }} id="checkReceived" value="checkReceived">Revisar Los implementos recibidos e indagar <strong> con tacto </strong> en caso de que alguno esté en mal estado</Checkbox>
           <Checkbox lineThrough onValueChange={(value) => { handleStatus(1, "checkClean", value) }} id="checkClean" value="checkClean">Revisar el aseo y de ser necesario dar alguna sugerencia <strong>amorosa</strong> al truno anterior</Checkbox>
           <Checkbox lineThrough onValueChange={(value) => { handleStatus(2, "chargeImplements", value) }} id="chargeImplements" value="chargeImplements">Cargar linternas y radios</Checkbox>
@@ -83,7 +83,7 @@ export default function TabsSection(data?: any) {
         </CheckboxGroup>
       </Tab>
       <Tab title="2PM - 10PM" className="w-10/12">
-        <CheckboxGroup defaultValue={keysConTrue}>
+        <CheckboxGroup defaultValue={keysConTrue || []}>
           <Checkbox lineThrough onValueChange={(value) => { handleStatus(11, "checkCleanAfterLunch", value) }} id="checkCleanAfterLunch" value="checkCleanAfterLunch">Revisar el aseo de oficina y garita y de ser necesario dar alguna sugerencia <strong>amorosa</strong> al truno anterior</Checkbox>
           <Checkbox lineThrough onValueChange={(value) => { handleStatus(12, "chargeImplements2", value) }} id="chargeImplements2" value="chargeImplements2">Cargar linternas y radios</Checkbox>
           <Checkbox lineThrough onValueChange={(value) => { handleStatus(13, "receiveCleanImplements", value) }} id="receiveCleanImplements" value="receiveCleanImplements">Antes de 5:00 p.m. recibir a los implementos de aseo y ubicarlos en su sitio de los voluntarios de las congregaciones</Checkbox>
@@ -97,7 +97,7 @@ export default function TabsSection(data?: any) {
       </Tab>
 
       <Tab title="10PM - 6AM" className="w-10/12">
-        <CheckboxGroup defaultValue={keysConTrue}>
+        <CheckboxGroup defaultValue={keysConTrue || []}>
           <Checkbox lineThrough onValueChange={(value) => { handleStatus(20, "remindNightClean", value) }} id="remindNightClean" value="remindNightClean">4:00 a.m. Pedir a los voluntarios realizar aseo a los baños y a la portería</Checkbox>
           <Checkbox lineThrough onValueChange={(value) => { handleStatus(21, "submitReport", value) }} id="submitReport" value="submitReport">Enviar reporte de turno al superintendente del departamento</Checkbox>
         </CheckboxGroup>
