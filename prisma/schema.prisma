@@ -22,20 +22,6 @@ model Volunteer {
   updatedAt   DateTime @updatedAt
 }
 
-model Task {
-  id   Int          @id @default(autoincrement())
-  task TaskStatus[]
-}
-
-model TaskStatus {
-  id        Int      @id @default(autoincrement())
-  taskId    Int
-  task      Task     @relation(fields: [taskId], references: [id])
-  status    Boolean
-  createdAt DateTime @default(now()) @unique
-  updatedAt DateTime @updatedAt
-}
-
 model Responsible {
   id                   Int      @id @default(autoincrement())
   morningResponsible   String?
@@ -72,4 +58,32 @@ model Items {
   note       InventoryNotes @relation(fields: [noteId], references: [id])
   noteId     Int
   pictureUrl String
+}
+
+model TaskStatus {
+  id                     Int      @id @default(autoincrement())
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+  checkReceived          Boolean
+  checkClean             Boolean
+  chargeImplements       Boolean
+  openParking            Boolean
+  washJackets            Boolean
+  receiveVolunteers      Boolean
+  submitAssistance       Boolean
+  takeCounterPhoto       Boolean
+  fixTrash               Boolean
+  cleanAfterLunch        Boolean
+  cleanOffices           Boolean
+  checkCleanAfterLunch   Boolean
+  chargeImplements2      Boolean
+  receiveCleanImplements Boolean
+  registerExit           Boolean
+  fixTrashAfternoon      Boolean
+  receiveNightVolunteers Boolean
+  closeParking           Boolean
+  cleanAfterDinner       Boolean
+  washJacketsNight       Boolean
+  remindNightClean       Boolean
+  submitReport           Boolean
 }

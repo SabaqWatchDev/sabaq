@@ -27,3 +27,28 @@ export type responsibleToday = {
 }
 
 export type responsiblesToday = responsibleToday[]
+
+export type StatusObject = {
+  openParking: boolean;
+  receiveVolunteers: boolean;
+  submitReport: boolean;
+  washJacketsNight: boolean;
+  chargeImplements2: boolean;
+  cleanOffices: boolean;
+  chargeImplements: boolean;
+  fixTrashAfternoon: boolean;
+  submitAssistance: boolean;
+  checkClean: boolean;
+  washJackets: boolean;
+  takeCounterPhoto: boolean;
+  cleanAfterDinner: boolean;
+  closeParking: boolean;
+  fixTrash: boolean;
+  cleanAfterLunch: boolean;
+  checkCleanAfterLunch: boolean;
+  checkReceived: boolean;
+  remindNightClean: boolean;
+  receiveCleanImplements: boolean;
+  receiveNightVolunteers: boolean;
+  registerExit: boolean;
+}

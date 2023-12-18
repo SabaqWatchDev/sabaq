@@ -1,16 +1,27 @@
 import NavigationBar from "@/components/NavigationBar";
-import { Button } from "@nextui-org/react";
-import TabsSection from "./components/sections/TabsSection";
 
-export default function Instructions() {
+import TabsSection from "./components/sections/TabsSection";
+import SubmitSection from "./components/sections/SubmitSection";
+
+import { getStatus } from "./adapter/getStatus";
+
+export default async function Instructions() {
+  const statusData = await getStatus()
+
+  const convertedArray: any = Object.keys(statusData[0])
+    .filter((key) => key !== 'id' && key !== 'createdAt' && key !== 'updatedAt')
+    .map((key) => ({
+      [key]: statusData[0][key],
+    }));
+
   return (
     <div className="w-screen h-screen">
       <NavigationBar currentPage="instructions" />
 
       <div className="flex flex-col h-5/6 items-center justify-center gap-4">
-        <TabsSection />
+        <TabsSection data={convertedArray} />
 
-        <Button className="w-10/12" size="lg" color="primary">Guardar Cambios</Button>
+        <SubmitSection />
       </div>
     </div>
   )
