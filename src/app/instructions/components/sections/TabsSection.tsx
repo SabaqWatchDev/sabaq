@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function TabsSection(data?: any) {
   const [statuses, setStatuses] = useState(
-    data.data
+    data.data && data.data
     ||
     [
       { checkReceived: false },
@@ -43,10 +43,18 @@ export default function TabsSection(data?: any) {
     }
   }, [statuses]);
 
-    const keysConTrue = (data.data as any[])
-      .filter((objeto: any) => Object.values(objeto).some((valor: any) => valor === true))
-      .map((objeto: any) => Object.keys(objeto))
-      .flat();
+  const getSelectedKeys = () => {
+    if (data.data && data.data.length > 0) {
+      const keysConTrue = (data.data as any[])
+        .filter((objeto: any) => Object.values(objeto).some((valor: any) => valor === true))
+        .map((objeto: any) => Object.keys(objeto))
+        .flat();
+
+      return keysConTrue
+    }
+  }
+
+  const keysConTrue = getSelectedKeys()
 
   const handleStatus = (index: number, id: string, value: boolean) => {
     setStatuses((prevStatuses: any) => {
@@ -84,7 +92,7 @@ export default function TabsSection(data?: any) {
       </Tab>
       <Tab title="2PM - 10PM" className="w-10/12">
         <CheckboxGroup defaultValue={keysConTrue || []}>
-          <Checkbox lineThrough onValueChange={(value) => { handleStatus(11, "checkCleanAfterLunch", value) }} id="checkCleanAfterLunch" value="checkCleanAfterLunch">Revisar el aseo de oficina y garita y de ser necesario dar alguna sugerencia <strong>amorosa</strong> al truno anterior</Checkbox>
+          <Checkbox lineThrough onValueChange={(value) => { handleStatus(11, "checkCleanAfterLunch", value) }} id="checkCleanAfterLunch" value="checkCleanAfterLunch">Revisar el aseo de oficina y garita y de ser necesario dar alguna sugerencia <strong>amorosa</strong> al turno anterior</Checkbox>
           <Checkbox lineThrough onValueChange={(value) => { handleStatus(12, "chargeImplements2", value) }} id="chargeImplements2" value="chargeImplements2">Cargar linternas y radios</Checkbox>
           <Checkbox lineThrough onValueChange={(value) => { handleStatus(13, "receiveCleanImplements", value) }} id="receiveCleanImplements" value="receiveCleanImplements">Antes de 5:00 p.m. recibir a los implementos de aseo y ubicarlos en su sitio de los voluntarios de las congregaciones</Checkbox>
           <Checkbox lineThrough onValueChange={(value) => { handleStatus(14, "registerExit", value) }} id="registerExit" value="registerExit">Registrar salida de voluntarios de mantenimiento y recibir chalecos</Checkbox>

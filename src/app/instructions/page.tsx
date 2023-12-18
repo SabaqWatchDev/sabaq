@@ -8,11 +8,19 @@ import { getStatus } from "./adapter/getStatus";
 export default async function Instructions() {
   const statusData = await getStatus()
 
-  const convertedArray: any = Object.keys(statusData[0])
-    .filter((key) => key !== 'id' && key !== 'createdAt' && key !== 'updatedAt')
-    .map((key) => ({
-      [key]: statusData[0][key],
-    }));
+  const getConvertedData = () => {
+    if (statusData !== null && statusData !== undefined && statusData.length > 0) {
+      const convertedArray: any = Object.keys(statusData[0])
+        .filter((key) => key !== 'id' && key !== 'createdAt' && key !== 'updatedAt')
+        .map((key) => ({
+          [key]: statusData[0][key],
+        }));
+
+      return convertedArray
+    }
+  }
+
+  const convertedArray = getConvertedData()
 
   return (
     <div className="w-screen h-screen">
