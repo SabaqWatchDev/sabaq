@@ -3,6 +3,7 @@ import { Input } from '@nextui-org/input';
 
 import { checkSignIn } from '@/libs/domain/signIn';
 import SignInError from '@/components/SignInError';
+// import DataButton from '../components/DataButton';
 
 export default function SignIn() {
   return (
@@ -21,6 +22,7 @@ export default function SignIn() {
 
           <Button type='submit' color='primary' className='w-full'>Iniciar Sesión</Button>
         </form>
+
       </div>
     </>
   )
