@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import saveChanges from "../../domain/saveChanges"
 import { Button } from "@nextui-org/react"
+import { NextResponse } from "next/server"
 
 export default function SubmitSection() {
   const router = useRouter()
@@ -22,7 +23,15 @@ export default function SubmitSection() {
       }
     }
 
-    const res = await saveChanges(storage).then(() => { localStorage.clear() }).finally(() => { router.refresh })
+    try {
+      const res = await saveChanges(storage);
+      localStorage.clear();
+      router.refresh();
+
+      console.log(res)
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
