@@ -105,9 +105,11 @@ export default async function saveChanges(inventoryStorage: string[]) {
     }
   }
 
-  prepareExistingInput()
+  if (localStorage.getItem('1-amount') !== null) {
+    prepareExistingInput()
 
-  for (let i = 0; i < existingInputArray.length; i++) {
-    editRecord(existingInputArray[i])
+    for (let i = 0; i < existingInputArray.length; i++) {
+      editRecord(existingInputArray[i])
+    }
   }
 }
