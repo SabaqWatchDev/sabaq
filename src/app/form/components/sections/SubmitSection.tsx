@@ -29,7 +29,22 @@ export default function SubmitSection() {
       afternoonResponsible: localStorage.getItem("responsible-afternoon") || ""
     }
 
-    const res = await saveChanges(storage).then(() => { saveResponsibles(inputResponsibles) }).then(() => { clearInputs() }).finally(() => { router.refresh() });
+    // const res = await saveChanges(storage).then(() => { saveResponsibles(inputResponsibles) }).then(() => { clearInputs() }).finally(() => { router.refresh() });
+
+    try {
+      const res = await saveChanges(storage)
+      const responsibles = await saveResponsibles(inputResponsibles);
+
+      clearInputs()
+
+      router.refresh()
+
+
+    } catch (error) {
+      console.error(error)
+
+      throw new Error
+    }
   }
 
   return (
