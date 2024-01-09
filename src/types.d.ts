@@ -51,4 +51,6 @@ export type StatusObject = {
   receiveCleanImplements: boolean;
   receiveNightVolunteers: boolean;
   registerExit: boolean;
+  entranceToken: boolean;
+  entranceAfternoonToken: boolean;
 }

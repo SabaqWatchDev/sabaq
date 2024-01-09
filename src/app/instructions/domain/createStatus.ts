@@ -28,7 +28,9 @@ export async function createStatus(userInput: StatusObject) {
         submitReport: userInput.submitReport,
         takeCounterPhoto: userInput.takeCounterPhoto,
         washJackets: userInput.washJackets,
-        washJacketsNight: userInput.washJacketsNight
+        washJacketsNight: userInput.washJacketsNight,
+        entranceToken: userInput.entranceToken,
+        entranceAfternoonToken: userInput.entranceAfternoonToken
       }
     })
     return submitResult
