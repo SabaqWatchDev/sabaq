@@ -31,7 +31,7 @@ export default async function saveChanges(inventoryStorage: string[]) {
             break
 
           case "receivedAt":
-            rawInput.receivedAt = setTime(inputValue) || null
+            rawInput.receivedAt = setTime(inputValue) || ""
             break
 
           case "receivedStatus":

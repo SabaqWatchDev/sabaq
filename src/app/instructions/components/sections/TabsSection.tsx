@@ -30,6 +30,8 @@ export default function TabsSection(data?: any) {
       { washJacketsNight: false },
       { remindNightClean: false },
       { submitReport: false },
+      { entranceToken: false },
+      { entranceAfternoonToken: false}
     ]);
 
   useEffect(() => {

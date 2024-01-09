@@ -10,7 +10,7 @@
     "lint": "next lint",
     "prismaDev": "dotenv -e .env.local prisma migrate dev",
     "prismaDevStudio": "dotenv -e .env.local prisma studio",
-    "prismaProd": "dotenv -e .env.production prisma migrate dev",
+    "prismaProd": "dotenv -e .env prisma migrate dev",
     "prismaProdStudio": "dotenv -e .env.production prisma studio"
   },
   "dependencies": {

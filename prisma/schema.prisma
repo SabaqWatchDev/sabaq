@@ -86,4 +86,6 @@ model TaskStatus {
   washJacketsNight       Boolean
   remindNightClean       Boolean
   submitReport           Boolean
+  entranceToken          Boolean
+  entranceAfternoonToken Boolean
 }
